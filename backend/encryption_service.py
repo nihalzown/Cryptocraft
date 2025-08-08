@@ -17,3 +17,15 @@ def encrypt_aes(plaintext: str, key: str) -> str:
     except Exception as e:
         print(f"Encryption failed: {e}")
         return None
+    
+
+
+if __name__ == "__main__":
+    print("Testing encryption service...")
+    myplaintext = "i am a secret message"
+    mysecretkey = "my_secret_key"
+    encrypted = encrypt_aes(myplaintext, mysecretkey)
+    if encrypted:
+        print(f"Encrypted message: {encrypted}")
+    else:
+        print("Encryption failed.")
