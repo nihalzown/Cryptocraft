@@ -1,13 +1,13 @@
 from Crypto.Cipher import AES
 from Crypto.Util.Padding import pad, unpad
-from Crypto.Hash import sha256
+from Crypto.Hash import SHA256
 import base64
 
 def encrypt_aes(plaintext: str, key: str) -> str:
     try:
         plaintext_bytes = plaintext.encode('utf-8')
         key_bytes = key.encode('utf-8')
-        hasher = sha256.new(key_bytes)
+        hasher = SHA256.new(key_bytes)
         aes_key = hasher.digest()[:16]
         cipher = AES.new(aes_key, AES.MODE_CBC)
         ciphertext = cipher.encrypt(pad(plaintext_bytes, AES.block_size))
@@ -25,6 +25,7 @@ if __name__ == "__main__":
     myplaintext = "i am a secret message"
     mysecretkey = "my_secret_key"
     encrypted = encrypt_aes(myplaintext, mysecretkey)
+    print(f"Secret key used: {mysecretkey}")
     if encrypted:
         print(f"Encrypted message: {encrypted}")
     else:
