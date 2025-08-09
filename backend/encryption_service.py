@@ -3,6 +3,9 @@ from Crypto.Util.Padding import pad, unpad
 from Crypto.Hash import SHA256
 import base64
 
+
+# modern ciphers
+
 def encrypt_aes(plaintext: str, key: str) -> str:
     try:
         plaintext_bytes = plaintext.encode('utf-8')
@@ -18,6 +21,18 @@ def encrypt_aes(plaintext: str, key: str) -> str:
         print(f"Encryption failed: {e}")
         return None
     
+#classic ciphers
+
+def encrypt_caesar(plaintext: str, shift: int) -> str:
+    encrypted =""
+    for char in plaintext:
+        if char.isupper():
+            encrypted += chr((ord(char) - ord('A') + shift) % 26 + ord('A'))
+        elif char.islower():
+            encrypted += chr((ord(char) - ord('a') + shift) % 26 + ord('a'))
+        else:
+            encrypted += char
+    return encrypted
 
 
 if __name__ == "__main__":
