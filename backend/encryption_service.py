@@ -107,6 +107,18 @@ def encrypt_playfair(plaintext: str, key: str) -> str:
     return ciphertext
 
 
+def encrypt_hill(plaintext: str, key: str) -> str:
+    key = key.upper().replace(" ", "")
+    plaintext = plaintext.upper().replace(" ", "")
+
+    if len(key) != 9 or not key.isalpha():
+        return "Invalid Hill cipher key"
+    
+    key_matrix = np.array([ord(k) - ord('A') for k in key]).reshape(3, 3)
+
+    
+
+
 if __name__ == "__main__":
     print("Testing encryption service...")
     myplaintext = "i am a secret message"
