@@ -44,6 +44,21 @@ def encrypt_substitution(plaintext: str, key: str) -> str:
     return plaintext.translate(key_map)
 
 
+def encrypt_railfence(plaintext: str, key: int) -> str:
+    if key <= 1:
+        return plaintext
+    
+    fence = [[] for _ in range(key)]
+    direction = 1
+    rail = 0
+    for char in plaintext:
+        fence[rail].append(char)
+        rail += direction
+        if rail == 0 or rail == key - 1:
+            direction *= -1
+    
+    return "".join([''.join(row) for row in fence])
+
 
 
 
