@@ -79,7 +79,32 @@ def encrypt_playfair(plaintext: str, key: str) -> str:
                 return i, row.find(char)
         return -1, -1
 
+    def prepare_text(text):
+        text = re.sub(r'[^A-Z]', '', text.upper().replace('J', 'I'))
+        i = 0
+        while i<len(text)-1:
+            if text[i] == text[i+1]:
+                text = text[:i+1] + 'X' + text[i+1:]
+            i += 2
+        if len(text) % 2 != 0:
+            text += 'X'
+        return [text[i:i + 2] for i in range(0, len(text), 2)]
+    
+    table = generate_table(key)
+    diagraphs = prepare_text(plaintext)
+    ciphertext = ""
 
+    for pair in diagraphs:
+        r1, c1 = find_position(pair[0], table)
+        r2, c2 = find_position(pair[1], table)
+        if r1 == r2:  # same row
+            ciphertext += table[r1][(c1 + 1) % 5] + table[r2][(c2 + 1) % 5]
+        elif c1 == c2:  # same column
+            ciphertext += table[(r1 + 1) % 5][c1] + table[(r2 + 1) % 5][c2]
+        else:  # rectangle
+            ciphertext += table[r1][c2] + table[r2][c1]
+
+    return ciphertext
 
 
 if __name__ == "__main__":
