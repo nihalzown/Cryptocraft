@@ -3,6 +3,9 @@ from Crypto.Util.Padding import pad, unpad
 from Crypto.Hash import SHA256
 import base64
 
+import re
+import numpy as np
+
 
 # modern ciphers
 
@@ -60,6 +63,21 @@ def encrypt_railfence(plaintext: str, key: int) -> str:
     return "".join([''.join(row) for row in fence])
 
 
+def encrypt_playfair(plaintext: str, key: str) -> str:
+    def generate_table(key):
+        key = re.sub(r'[^A-Z]', '', key.upper().replace('J', 'I'))
+        alphabet = 'ABCDEFGHIKLMNOPQRSTUVWXYZ'
+        table_chars = ""
+        for char in key + alphabet:
+            if char not in table_chars:
+                table_chars += char
+        return [table_chars[i:i + 5] for i in range(0,25,5)]
+    
+    def find_position(char, table):
+        for i, row in enumerate(table):
+            if char in row:
+                return i, row.find(char)
+        return -1, -1
 
 
 
