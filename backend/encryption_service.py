@@ -35,6 +35,20 @@ def encrypt_caesar(plaintext: str, shift: int) -> str:
     return encrypted
 
 
+def encrypt_substitution(plaintext: str, key: str) -> str:
+    alphabet = 'abcdefghijklmnopqrstuvwxyz'
+    if len(key) != 26 or not key.isalpha() or len(set(key.lower())) != 26:
+        return "Invalid substitution key"
+    
+    key_map = str.maketrans(alphabet + alphabet.upper(), key.lower() + key.upper())
+    return plaintext.translate(key_map)
+
+
+
+
+
+
+
 if __name__ == "__main__":
     print("Testing encryption service...")
     myplaintext = "i am a secret message"
