@@ -132,15 +132,56 @@ def encrypt_hill(plaintext: str, key: str) -> str:
     return ciphertext
 
     
-
+# --test cases for the encryption service
 
 if __name__ == "__main__":
-    print("Testing encryption service...")
-    myplaintext = "i am a secret message"
-    mysecretkey = "my_secret_key"
-    encrypted = encrypt_aes(myplaintext, mysecretkey)
-    print(f"Secret key used: {mysecretkey}")
-    if encrypted:
-        print(f"Encrypted message: {encrypted}")
-    else:
-        print("Encryption failed.")
+   print("stage 1: Testing all ciphers")
+
+   print("\naes encryption:")
+   aes_plaintext = "Hello, World!"
+   aes_key = "my_secret_key"
+   print(f"Plaintext: {aes_plaintext}")
+   aes_encrypted = encrypt_aes(aes_plaintext, aes_key)
+   print(f"Encrypted: {aes_encrypted}")
+
+   print("\ncaesar encryption:")
+   caesar_plaintext = "Hello, World!"
+   caesar_shift = 3
+   print(f"Plaintext: {caesar_plaintext}")
+   caesar_encrypted = encrypt_caesar(caesar_plaintext, caesar_shift)
+   print(f"Encrypted: {caesar_encrypted}")
+
+
+   print("\nsubstitution encryption:")
+   substitution_plaintext = "Hello, World!"
+   substitution_key = "QWERTYUIOPASDFGHJKLZXCVBNM"
+   print(f"Plaintext: {substitution_plaintext}")
+   substitution_encrypted = encrypt_substitution(substitution_plaintext, substitution_key)
+   print(f"Encrypted: {substitution_encrypted}")
+
+
+   print("\nrailfence encryption:")
+   railfence_plaintext = "Hello, World!"
+   railfence_key = 3
+   print(f"Plaintext: {railfence_plaintext}")
+   railfence_encrypted = encrypt_railfence(railfence_plaintext, railfence_key)
+   print(f"Encrypted: {railfence_encrypted}")
+
+
+   print("\nplayfair encryption:")
+   playfair_plaintext = "Hello, World!"
+   playfair_key = "PLAYFAIR EXAMPLE"
+   print(f"Plaintext: {playfair_plaintext}")
+   playfair_encrypted = encrypt_playfair(playfair_plaintext, playfair_key)
+   print(f"Encrypted: {playfair_encrypted}")
+
+   print("\nhill encryption:")
+   hill_plaintext = "HELLO"
+   hill_key = "GYBNQKURP"
+   print(f"Plaintext: {hill_plaintext}")
+   hill_encrypted = encrypt_hill(hill_plaintext, hill_key)
+   print(f"Encrypted: {hill_encrypted}")
+
+   print("\nAll ciphers tested successfully.")
+
+
