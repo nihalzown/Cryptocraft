@@ -29,7 +29,16 @@ def encrypt_des(plaintext: str, key: str) -> str:
         plaintext_bytes = plaintext.encode('utf-8')
         key_bytes = key.encode('utf-8')
         hasher = SHA256.new(key_bytes)
-        
+        des_key = hasher.digest()[:8]
+        cipher = DES.new(des_key, DES.MODE_CBC)
+        ciphertext = cipher.encrypt(pad(plaintext_bytes, DES.block_size))
+        iv = cipher.iv
+        encrypted_package = base64.b64encode(iv + ciphertext)
+        return encrypted_package.decode('utf-8')
+    except Exception as e:
+        print(f"Encryption failed: {e}")
+        return None
+
     
 #classic ciphers
 
