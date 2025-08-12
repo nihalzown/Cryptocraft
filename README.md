@@ -11,12 +11,13 @@ This initial stage focuses on building the core encryption logic for both modern
 ### Current Features
 
 -   **AES Encryption:** A modern, secure symmetric encryption standard.
+-   **DES Encryption:** A legacy symmetric encryption standard.
 -   **Classical Ciphers Implemented:**
     -   Caesar Cipher
     -   Simple Substitution Cipher
     -   Rail Fence Cipher
-    * Playfair Cipher
-    * Hill Cipher (3x3)
+    -   Playfair Cipher
+    -   Hill Cipher (3x3)
 
 ### How to Run This Stage
 
@@ -50,5 +51,5 @@ You will see the test output for all implemented ciphers printed to the terminal
 ### Technology Used
 
 -   Python 3
--   `pycryptodome` (for AES)
+-   `pycryptodome` (for AES & DES)
 -   `numpy` (for Hill Cipher)
