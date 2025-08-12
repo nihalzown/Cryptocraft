@@ -116,6 +116,21 @@ def encrypt_hill(plaintext: str, key: str) -> str:
     
     key_matrix = np.array([ord(k) - ord('A') for k in key]).reshape(3, 3)
 
+    det = int(round(np.linalg.det(key_matrix)))
+    if det == 0 or np.gcd(det, 26) != 1:
+        return "key not invertible"
+    
+    if len(plaintext) % 3 != 0:
+        plaintext += 'X' * (3 - len(plaintext) % 3)
+
+    ciphertext = ""
+    for i in range(0, len(plaintext), 3):
+        vector = np.array([ord(c) - ord('A') for c in plaintext[i:i + 3]])
+        encrypted_vector = np.dot(key_matrix, vector) % 26
+        ciphertext += ''.join([chr(int(n) + ord('A')) for n in encrypted_vector])
+    
+    return ciphertext
+
     
 
 
