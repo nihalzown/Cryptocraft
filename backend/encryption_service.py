@@ -160,6 +160,13 @@ if __name__ == "__main__":
    aes_encrypted = encrypt_aes(aes_plaintext, aes_key)
    print(f"Encrypted: {aes_encrypted}")
 
+   print("\ndes encryption:")
+   des_plaintext = "Hello, World!"
+   des_key = "my_secret_key"
+   print(f"Plaintext: {des_plaintext}")
+   des_encrypted = encrypt_des(des_plaintext, des_key)
+   print(f"Encrypted: {des_encrypted}")
+
    print("\ncaesar encryption:")
    caesar_plaintext = "Hello, World!"
    caesar_shift = 3
