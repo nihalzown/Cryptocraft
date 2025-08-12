@@ -6,13 +6,17 @@ A web application for encrypting text using various cryptographic algorithms.
 
 ## Stage 1: Core Encryption Engine - COMPLETE ✅
 
-This initial stage focuses on building the core encryption logic as a standalone Python script. The goal was to create a reliable function that can securely encrypt data using the AES standard.
+This initial stage focuses on building the core encryption logic for both modern and classical ciphers in a standalone Python script.
 
 ### Current Features
 
--   Encrypts a hardcoded string using **AES** in **CBC mode**.
--   Derives a secure, fixed-length key from a secret password using **SHA-256**.
--   Packages the necessary **IV (Initialization Vector)** and ciphertext into a transport-safe **Base64** string.
+-   **AES Encryption:** A modern, secure symmetric encryption standard.
+-   **Classical Ciphers Implemented:**
+    -   Caesar Cipher
+    -   Simple Substitution Cipher
+    -   Rail Fence Cipher
+    * Playfair Cipher
+    * Hill Cipher (3x3)
 
 ### How to Run This Stage
 
@@ -31,23 +35,20 @@ To test the functionality of this stage:
     ```
 
 3.  **Install dependencies:**
-    *(Before installing, it's good practice to create a `requirements.txt` file)*
-    ```bash
-    pip freeze > requirements.txt
-    ```
-    *(Now, install from the file)*
     ```bash
     pip install -r requirements.txt
     ```
+    *(If you don't have a `requirements.txt` file yet, create one with `pip freeze > requirements.txt` after installing the libraries.)*
 
 4.  **Run the script:**
     ```bash
     python encryption_service.py
     ```
 
-You will see the test output printed directly to the terminal, showing the original text and the final encrypted Base64 string.
+You will see the test output for all implemented ciphers printed to the terminal.
 
 ### Technology Used
 
 -   Python 3
--   `pycryptodome`
+-   `pycryptodome` (for AES)
+-   `numpy` (for Hill Cipher)
