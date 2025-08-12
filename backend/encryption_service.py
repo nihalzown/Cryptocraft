@@ -1,4 +1,4 @@
-from Crypto.Cipher import AES
+from Crypto.Cipher import AES, DES
 from Crypto.Util.Padding import pad, unpad
 from Crypto.Hash import SHA256
 import base64
@@ -23,6 +23,13 @@ def encrypt_aes(plaintext: str, key: str) -> str:
     except Exception as e:
         print(f"Encryption failed: {e}")
         return None
+    
+def encrypt_des(plaintext: str, key: str) -> str:
+    try:
+        plaintext_bytes = plaintext.encode('utf-8')
+        key_bytes = key.encode('utf-8')
+        hasher = SHA256.new(key_bytes)
+        
     
 #classic ciphers
 
