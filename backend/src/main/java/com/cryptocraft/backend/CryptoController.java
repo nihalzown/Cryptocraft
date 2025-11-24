@@ -21,16 +21,16 @@ public class CryptoController {
         String key = request.getKey();
         String result = "";
 
-        if(alogo== null || text == null || key == null ){
+        if(algo== null || text == null || key == null ){
             return Collections.singletonMap("error", "Missing algorithm,plaintext or key");
         }
 
         try{
             switch(algo.toLowerCase()){
-                case "ceasar":
+                case "caesar":
                     try{
                         int shift = Integer.parseInt(key);
-                        result = service.encryptCeasar(text,shift);
+                        result = service.encryptCaesar(text,shift);
                     } catch(NumberFormatException e){
                         return Collections.singletonMap("error", "Caesar key must be a number");
                     }break;
