@@ -17,6 +17,7 @@ export default function Home(){
 
   const handleSubmit = async(e) =>{
     e.preventDefault();
+    console.log("BUTTON CLICKED! Form Data:", formData);
     setError("");
     setResult("");
 
@@ -29,7 +30,7 @@ export default function Home(){
         body: JSON.stringify(formData),
       });
       
-      const data =await response.jason();
+      const data =await response.json();
 
       if(data.error){
         setError(data.error);
@@ -46,7 +47,7 @@ export default function Home(){
       <h1 className="text-4xl font-bold mb-8 text-green-400">🛡️ CryptoCraft</h1>
 
       <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md border border-gray-700">
-        <from onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           {/*ALgorithm selecting */}
           <div>
             <label className="block text-sm font-medium mb-1">ALgorithm</label>
@@ -93,7 +94,7 @@ export default function Home(){
           >
             Encrypt Now 🔒
           </button>
-        </from>
+        </form>
 
 
         {/* Results Section */}
