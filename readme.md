@@ -1,0 +1,273 @@
+# 🔐 CryptoCraft
+
+**CryptoCraft** is a modern web application that bridges the gap between complex cryptographic mathematics and user-friendly design. It allows users to encrypt text using a variety of algorithms—ranging from ancient historical ciphers to modern military-grade standards.
+
+## 🏗️ Architecture
+
+CryptoCraft follows a **decoupled architecture** where the frontend and backend are separate projects that communicate via REST APIs:
+
+- **Backend (The Brain) 🧠**: Java Spring Boot application handling encryption logic
+- **Frontend (The Face) 🎨**: Next.js React application providing the user interface
+
+## 🔧 Technologies Used
+
+### Backend
+- **Language**: Java 17
+- **Framework**: Spring Boot 3.4.12
+- **Build Tool**: Maven
+- **Dependencies**: Spring Web, Spring Boot Test
+
+### Frontend
+- **Framework**: Next.js 16.0.3
+- **Runtime**: React 19.2.0
+- **Styling**: Tailwind CSS 4
+- **Linting**: ESLint with Next.js config
+
+## 🔐 Supported Encryption Algorithms
+
+### Classical Ciphers (Educational)
+1. **Caesar Cipher**: Shifts letters by a fixed number of positions
+2. **Substitution Cipher**: Replaces each letter with another letter based on a key
+3. **Playfair Cipher**: Encrypts pairs of letters using a 5×5 grid
+
+### Modern Standards (Secure)
+1. **DES (Data Encryption Standard)**: Legacy symmetric encryption algorithm
+
+## 📁 Project Structure
+
+```
+CryptoCraft/
+├── backend/                 # Spring Boot backend
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/
+│   │   │   │   └── com/cryptocraft/backend/
+│   │   │   │       ├── BackendApplication.java
+│   │   │   │       ├── CryptoController.java
+│   │   │   │       ├── EncryptionRequest.java
+│   │   │   │       └── EncryptionService.java
+│   │   │   └── resources/
+│   │   │       └── application.properties
+│   │   └── test/
+│   ├── pom.xml
+│   └── mvnw / mvnw.cmd
+├── frontend/                # Next.js frontend
+│   ├── src/
+│   │   └── app/
+│   │       ├── page.js
+│   │       ├── layout.js
+│   │       └── globals.css
+│   ├── public/
+│   ├── package.json
+│   └── next.config.mjs
+└── README.md
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Java 17** or higher
+- **Node.js 18** or higher
+- **npm** or **yarn**
+
+### Backend Setup
+
+1. **Navigate to the backend directory**:
+   ```bash
+   cd backend
+   ```
+
+2. **Run the Spring Boot application**:
+   ```bash
+   # Using Maven wrapper (recommended)
+   ./mvnw spring-boot:run
+   
+   # Or using Maven (if installed globally)
+   mvn spring-boot:run
+   ```
+
+3. **Verify the backend is running**:
+   - The application will start on `http://localhost:8080`
+   - Check the console for the startup message
+
+### Frontend Setup
+
+1. **Navigate to the frontend directory**:
+   ```bash
+   cd frontend
+   ```
+
+2. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
+
+4. **Access the application**:
+   - Open your browser and navigate to `http://localhost:3000`
+
+## 🔗 API Endpoints
+
+The backend provides the following REST API endpoint:
+
+### Encrypt Text
+- **URL**: `POST /api/encrypt`
+- **Content-Type**: `application/json`
+
+#### Request Body
+```json
+{
+  "algorithm": "caesar|substitution|playfair|des",
+  "plaintext": "Your text to encrypt",
+  "key": "Your encryption key"
+}
+```
+
+#### Response
+```json
+{
+  "result": "Encrypted text"
+}
+```
+
+#### Error Response
+```json
+{
+  "error": "Error message"
+}
+```
+
+### Example API Calls
+
+**Caesar Cipher:**
+```bash
+curl -X POST http://localhost:8080/api/encrypt \
+  -H "Content-Type: application/json" \
+  -d '{"algorithm": "caesar", "plaintext": "Hello World", "key": "3"}'
+```
+
+**Substitution Cipher:**
+```bash
+curl -X POST http://localhost:8080/api/encrypt \
+  -H "Content-Type: application/json" \
+  -d '{"algorithm": "substitution", "plaintext": "Hello", "key": "QWERTYUIOPASDFGHJKLZXCVBNM"}'
+```
+
+**Playfair Cipher:**
+```bash
+curl -X POST http://localhost:8080/api/encrypt \
+  -H "Content-Type: application/json" \
+  -d '{"algorithm": "playfair", "plaintext": "Hello World", "key": "SECRET"}'
+```
+
+**DES Encryption:**
+```bash
+curl -X POST http://localhost:8080/api/encrypt \
+  -H "Content-Type: application/json" \
+  -d '{"algorithm": "des", "plaintext": "Hello World", "key": "secretkey"}'
+```
+
+## 🧪 Testing
+
+### Backend Testing
+```bash
+cd backend
+./mvnw test
+```
+
+### Frontend Testing
+```bash
+cd frontend
+npm run lint
+```
+
+## 🔨 Development Scripts
+
+### Backend
+```bash
+# Start development server
+./mvnw spring-boot:run
+
+# Run tests
+./mvnw test
+
+# Build for production
+./mvnw package
+```
+
+### Frontend
+```bash
+# Start development server
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+
+# Run linting
+npm run lint
+```
+
+## 🎯 User Flow
+
+1. **Select**: User chooses an encryption algorithm
+2. **Input**: User enters text and encryption key
+3. **Process**: Frontend sends data to the backend API
+4. **Output**: Backend returns the encrypted text
+5. **Display**: User sees the encrypted result
+
+## 🔧 Configuration
+
+### Backend Configuration
+Edit `backend/src/main/resources/application.properties`:
+```properties
+spring.application.name=backend
+server.port=8080
+```
+
+### Frontend Configuration
+Edit `frontend/next.config.mjs` for Next.js specific configurations.
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+1. **Backend not starting**:
+   - Ensure Java 17+ is installed: `java -version`
+   - Check if port 8080 is available: `netstat -tulpn | grep :8080`
+
+2. **Frontend not starting**:
+   - Ensure Node.js is installed: `node -v`
+   - Clear npm cache: `npm cache clean --force`
+
+3. **API connection issues**:
+   - Verify backend is running on http://localhost:8080
+   - Check browser console for CORS errors
+   - Ensure both services are running simultaneously
+
+## 📝 License
+
+This project is for educational purposes. Feel free to use and modify as needed.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test your changes
+5. Submit a pull request
+
+## 📞 Support
+
+If you encounter any issues or have questions, please create an issue in the repository.
+
+---
+
+**Happy Encrypting! 🔐**
