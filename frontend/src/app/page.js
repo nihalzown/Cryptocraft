@@ -41,4 +41,32 @@ export default function Home(){
     }
   };
 
+  return (
+    <div className="min-h-screen bg-gray-900 text-white flex flex-col items-center justify-center p-4">
+      <h1 className="text-4xl font-bold mb-8 text-green-400">🛡️ CryptoCraft</h1>
+
+      <div className="bg-gray-800 p-8 rounded-lg shadow-lg w-full max-w-md border border-gray-700">
+        <from onSubmit={handleSubmit} className="space-y-4">
+          {/*ALgorithm selecting */}
+          <div>
+            <label className="block text-sm font-medium mb-1">ALgorithm</label>
+            <select
+              name="algorithm"
+              value={formData.algorithm}
+              onChange={handleChange}
+              className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:border-green-500"
+              >
+                <option value="caesar">Caesar Cipher</option>
+                <option value="substitution">Substitution Cipher</option>
+                <option value="playfair">Playfair Cipher</option>
+                <option value="des">DES Cipher</option>
+
+              </select>
+          </div>
+        </from>
+      </div>
+    </div>
+  )
+
+
 }
