@@ -74,18 +74,25 @@ export default function Home(){
               required
             />
           </div>
-          {/*kay input*/}
+          {/*key input*/}
           <div>
             <label className="block text-sm font-medium mb-1">Secret key</label>
-            <textarea
-              name="plaintext"
-              value={formData.plaintext}
+            <input
+              type="text"
+              name="key"
+              value={formData.key}
               onChange={handleChange}
-              placeholder="Enter text to encrypt..."
-              className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:border-green-500 h-24"
+              placeholder="e.g, 3 for Caesar, or a password"
+              className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:border-green-500"
               required
             />
           </div>
+          <button
+            type="submit"
+            className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-200"
+          >
+            Encrypt Now 🔒
+          </button>
         </from>
       </div>
     </div>
