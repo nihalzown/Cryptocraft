@@ -60,8 +60,31 @@ export default function Home(){
                 <option value="substitution">Substitution Cipher</option>
                 <option value="playfair">Playfair Cipher</option>
                 <option value="des">DES Cipher</option>
-
               </select>
+          </div>
+          {/*Plaintext input*/}
+          <div>
+            <label className="block text-sm font-medium mb-1">Message</label>
+            <textarea
+              name="plaintext"
+              value={formData.plaintext}
+              onChange={handleChange}
+              placeholder="Enter text to encrypt..."
+              className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:border-green-500 h-24"
+              required
+            />
+          </div>
+          {/*kay input*/}
+          <div>
+            <label className="block text-sm font-medium mb-1">Secret key</label>
+            <textarea
+              name="plaintext"
+              value={formData.plaintext}
+              onChange={handleChange}
+              placeholder="Enter text to encrypt..."
+              className="w-full p-2 rounded bg-gray-700 border border-gray-600 focus:outline-none focus:border-green-500 h-24"
+              required
+            />
           </div>
         </from>
       </div>
