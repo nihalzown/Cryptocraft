@@ -94,9 +94,24 @@ export default function Home(){
             Encrypt Now 🔒
           </button>
         </from>
+
+
+        {/* Results Section */}
+        {error && (
+          <div className="mt-4 p-3 bg-red-900/50 border border-red-500 text-red-200 rounded">
+            ❌ {error}
+          </div>
+        )}
+
+        {result && (
+            <div className="mt-6">
+            <h3 className="text-lg font-semibold mb-2">Encrypted Result:</h3>
+            <div className="p-4 bg-gray-900 rounded border border-green-500/30 break-all font-mono text-green-300">
+              {result}
+            </div>
+          </div>
+        )}
       </div>
     </div>
-  )
-
-
+  );
 }
