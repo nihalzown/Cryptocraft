@@ -2,9 +2,11 @@ package com.cryptocraft.backend;
 
 import org.springframework.stereotype.Service;
 import javax.crypto.Cipher;
+import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.*;
 
 @Service
@@ -27,9 +29,11 @@ public class encryptionservice {
     }
 
     //2. monoalphabetic cipher
-    private static String alfa = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    public static String encrypt(String text ,String key){
+    public String encryptSubstitution(String text ,String key){
+        if (key == null || key.length() != 26) return "Invalid Key";
+        String alfa = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         text = text.toUpperCase();
+        key = key.toUpperCase();
         StringBuilder ct = new StringBuilder();
         for(char c : text.toCharArray()){
             int idx = alfa.indexOf(c);
@@ -44,7 +48,28 @@ public class encryptionservice {
     }
 
     //3. playfair cipher
-    private static void generateKeyMatrix(String key) {
+    public String playfairEncrypt(String text, String key) {
+        char[][] matrix = new char[5][5];
+        generateKeyMatrix(key , matrix);
+        text = prepareText(text);
+        StringBuilder cipher = new StringBuilder();
+        for (int i = 0; i < text.length(); i += 2) {
+            int[] pos1 = findPosition(text.charAt(i));
+            int[] pos2 = findPosition(text.charAt(i + 1));
+            if (pos1[0] == pos2[0]) { // Same row
+                cipher.append(matrix[pos1[0]][(pos1[1] + 1) % 5]);
+                cipher.append(matrix[pos2[0]][(pos2[1] + 1) % 5]);
+            } else if (pos1[1] == pos2[1]) { // Same column
+                cipher.append(matrix[(pos1[0] + 1) % 5][pos1[1]]);
+                cipher.append(matrix[(pos2[0] + 1) % 5][pos2[1]]);
+            } else { // Rectangle swap
+                cipher.append(matrix[pos1[0]][pos2[1]]);
+                cipher.append(matrix[pos2[0]][pos1[1]]);
+            }
+        }
+        return cipher.toString();
+    }
+    private void generateKeyMatrix(String key, char[][] matrix) {
         key = key.toUpperCase().replaceAll("[^A-Z]", "").replace("J", "I");
         StringBuilder sb = new StringBuilder();
         Set<Character> used = new HashSet<>();
@@ -66,7 +91,7 @@ public class encryptionservice {
                 matrix[i][j] = sb.charAt(k++);
     }
 
-    private static int[] findPosition(char c) {
+    private int[] findPosition(char c, char[][] matrix) {
         if (c == 'J') c = 'I';
         for (int i = 0; i < 5; i++)
             for (int j = 0; j < 5; j++)
@@ -75,7 +100,7 @@ public class encryptionservice {
         return null;
     }
 
-    private static String prepareText(String text) {
+    private String prepareText(String text) {
         text = text.toUpperCase().replaceAll("[^A-Z]", "").replace("J", "I");
         StringBuilder sb = new StringBuilder();
         int i = 0;
@@ -95,28 +120,14 @@ public class encryptionservice {
         return sb.toString();
     }
 
-    public static String playfairEncrypt(String text, String key) {
-        generateKeyMatrix(key);
-        text = prepareText(text);
-        StringBuilder cipher = new StringBuilder();
-        for (int i = 0; i < text.length(); i += 2) {
-            int[] pos1 = findPosition(text.charAt(i));
-            int[] pos2 = findPosition(text.charAt(i + 1));
-            if (pos1[0] == pos2[0]) { // Same row
-                cipher.append(matrix[pos1[0]][(pos1[1] + 1) % 5]);
-                cipher.append(matrix[pos2[0]][(pos2[1] + 1) % 5]);
-            } else if (pos1[1] == pos2[1]) { // Same column
-                cipher.append(matrix[(pos1[0] + 1) % 5][pos1[1]]);
-                cipher.append(matrix[(pos2[0] + 1) % 5][pos2[1]]);
-            } else { // Rectangle swap
-                cipher.append(matrix[pos1[0]][pos2[1]]);
-                cipher.append(matrix[pos2[0]][pos1[1]]);
-            }
-        }
-        return cipher.toString();
+    // des encryption
+    public String encryptDES(String plaintext, String secretKey) throws Exception{
+        byte[] keyBytes = Arrays.copyOf(secretKey.getBytes("UTF-8"),8);
+        SecretKey key = new SecretKeySpec(keyBytes, "DES");
+
+        Cipher cpr = Cipher.getInstance("DES/ECB/PKCS5Padding");
+        cpr.init(Cipher.ENCRYPT_MODE,key);
+        byte[] encrypted = cpr.doFinal(plaintext.getBytes("UTF-8"));
+        return Base64.getEncoder().encodeToString(encrypted);
     }
-
-
-
-
 }
