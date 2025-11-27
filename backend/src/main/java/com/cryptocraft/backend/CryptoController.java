@@ -47,6 +47,18 @@ public class CryptoController {
                         result = service.encryptDES(text, key);
                         break;
 
+                    case "aes":
+                    result = service.encryptAES(text, key);
+                    break;
+                
+                    case "blowfish":
+                        result = service.encryptBlowfish(text, key);
+                        break;
+
+                    case "rc4":
+                        result = service.encryptRC4(text, key);
+                        break;
+
                     default:
                         return Collections.singletonMap("error", "unknown algorithm: "+algo);
             }
