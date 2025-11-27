@@ -147,4 +147,36 @@ public class EncryptionService {
         byte[] encrypted = cipher.doFinal(plaintext.getBytes(StandardCharsets.UTF_8));
         return Base64.getEncoder().encodeToString(encrypted);
     }
+
+    // AES encryption
+    public String encryptAES(String plaintext, String secretKey) throws Exception {
+        byte[] keyBytes = Arrays.copyOf(secretKey.getBytes(StandardCharsets.UTF_8), 16);   
+        SecretKey key = new SecretKeySpec(keyBytes, "AES");
+        Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+        return Base64.getEncoder().encodeToString(cipher.doFinal(plaintext.getBytes(StandardCharsets.UTF_8)));
+    }
+
+
+    // RC4 encryption
+    public String encryptRC4(String plaintext, String secretKey) throws Exception {
+        byte[] keyBytes = Arrays.copyOf(secretKey.getBytes(StandardCharsets.UTF_8), 8);
+        SecretKey key = new SecretKeySpec(keyBytes, "RC4");
+
+        Cipher cipher = Cipher.getInstance("RC4");
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+        byte[] encrypted = cipher.doFinal(plaintext.getBytes(StandardCharsets.UTF_8));
+        return Base64.getEncoder().encodeToString(encrypted);
+    }
+
+    // blowfish encryption
+    public String encryptBlowfish(String plaintext, String secretKey) throws Exception {
+        byte[] keyBytes = Arrays.copyOf(secretKey.getBytes(StandardCharsets.UTF_8), 8);
+        SecretKey key = new SecretKeySpec(keyBytes, "Blowfish");
+
+        Cipher cipher = Cipher.getInstance("Blowfish/ECB/PKCS5Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+        byte[] encrypted = cipher.doFinal(plaintext.getBytes(StandardCharsets.UTF_8));
+        return Base64.getEncoder().encodeToString(encrypted);
+    }
 }
