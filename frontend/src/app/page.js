@@ -61,6 +61,9 @@ export default function Home(){
                 <option value="substitution">Substitution Cipher</option>
                 <option value="playfair">Playfair Cipher</option>
                 <option value="des">DES Cipher</option>
+                <option value="aes">AES (Modern Standard)</option>
+                <option value="blowfish">Blowfish</option>
+                <option value="rc4">RC4 (Stream Cipher)</option>
               </select>
           </div>
           {/*Plaintext input*/}
