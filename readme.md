@@ -1,6 +1,15 @@
 # 🔐 CryptoCraft
 
-**CryptoCraft** is a modern web application that bridges the gap between complex cryptographic mathematics and user-friendly design. It allows users to encrypt text using a variety of algorithms—ranging from ancient historical ciphers to modern military-grade standards.
+**CryptoCraft** is a modern web application that bridges the gap between complex cryptographic mathematics and user-friendly design. It features a sleek dark-themed interface and allows users to encrypt text using a variety of algorithms—ranging from ancient historical ciphers to modern military-grade standards.
+
+## ✨ Features
+
+- 🎨 **Modern Dark UI**: Beautiful dark-themed interface with green accent colors
+- 🔄 **Real-time Processing**: Instant encryption with live feedback
+- ⚡ **Multiple Algorithms**: Support for classical and modern encryption methods
+- 🛡️ **Error Handling**: Clear error messages and validation
+- 📱 **Responsive Design**: Works seamlessly across different screen sizes
+- 🔗 **RESTful API**: Clean backend API for easy integration
 
 ## 🏗️ Architecture
 
@@ -26,12 +35,17 @@ CryptoCraft follows a **decoupled architecture** where the frontend and backend 
 ## 🔐 Supported Encryption Algorithms
 
 ### Classical Ciphers (Educational)
-1. **Caesar Cipher**: Shifts letters by a fixed number of positions
-2. **Substitution Cipher**: Replaces each letter with another letter based on a key
-3. **Playfair Cipher**: Encrypts pairs of letters using a 5×5 grid
+1. **Caesar Cipher**: Shifts letters by a fixed number of positions ✅
+2. **Substitution Cipher**: Replaces each letter with another letter based on a key ✅
+3. **Playfair Cipher**: Encrypts pairs of letters using a 5×5 grid ✅
 
 ### Modern Standards (Secure)
-1. **DES (Data Encryption Standard)**: Legacy symmetric encryption algorithm
+1. **DES (Data Encryption Standard)**: Legacy symmetric encryption algorithm ✅
+2. **AES (Advanced Encryption Standard)**: Modern symmetric encryption 🚧
+3. **Blowfish**: Variable-length key block cipher 🚧
+4. **RC4**: Stream cipher algorithm 🚧
+
+> ✅ = Fully Implemented | 🚧 = Frontend Ready (Backend Implementation Pending)
 
 ## 📁 Project Structure
 
@@ -110,6 +124,14 @@ CryptoCraft/
 
 4. **Access the application**:
    - Open your browser and navigate to `http://localhost:3000`
+   - You should see the CryptoCraft interface with a dark theme and green accents
+
+### Application Status Indicators
+
+- ✅ **Backend Running**: API accessible at http://localhost:8080
+- ✅ **Frontend Running**: UI accessible at http://localhost:3000
+- 🔄 **Connected**: Frontend successfully communicates with backend
+- ❌ **Error Handling**: Clear error messages if backend is unavailable
 
 ## 🔗 API Endpoints
 
@@ -217,11 +239,30 @@ npm run lint
 
 ## 🎯 User Flow
 
-1. **Select**: User chooses an encryption algorithm
-2. **Input**: User enters text and encryption key
-3. **Process**: Frontend sends data to the backend API
-4. **Output**: Backend returns the encrypted text
-5. **Display**: User sees the encrypted result
+1. **Select**: User chooses an encryption algorithm from dropdown
+2. **Input**: User enters message in textarea and secret key in text field
+3. **Validate**: Frontend validates required fields before submission
+4. **Process**: Frontend sends JSON request to backend API at `/api/encrypt`
+5. **Response**: Backend processes encryption and returns result
+6. **Display**: Encrypted text appears in styled green code block
+7. **Error Handling**: Any errors are displayed in red alert box
+
+## 🖥️ User Interface
+
+### Main Interface Components
+- **Header**: Large "🛡️ CryptoCraft" title with green accent
+- **Algorithm Selector**: Dropdown with 7 encryption options
+- **Message Input**: Large textarea for text to encrypt
+- **Key Input**: Text field for encryption key/password
+- **Encrypt Button**: Green "Encrypt Now 🔒" call-to-action
+- **Results Display**: Styled output area with monospace font
+- **Error Display**: Red-themed error messages when needed
+
+### Design Features
+- **Color Scheme**: Dark gray background with green accents
+- **Typography**: Clean fonts with monospace for encrypted output
+- **Responsive**: Centered layout that works on all screen sizes
+- **Feedback**: Visual feedback for form interactions and states
 
 ## 🔧 Configuration
 
@@ -235,22 +276,13 @@ server.port=8080
 ### Frontend Configuration
 Edit `frontend/next.config.mjs` for Next.js specific configurations.
 
-## 🐛 Troubleshooting
+### API Integration
+The frontend automatically connects to the backend at `http://localhost:8080/api/encrypt`. The application includes:
+- **Automatic Error Handling**: Displays connection errors if backend is down
+- **Form Validation**: Ensures all required fields are filled
+- **Response Processing**: Handles both success and error responses
+- **Loading States**: Visual feedback during API calls
 
-### Common Issues
-
-1. **Backend not starting**:
-   - Ensure Java 17+ is installed: `java -version`
-   - Check if port 8080 is available: `netstat -tulpn | grep :8080`
-
-2. **Frontend not starting**:
-   - Ensure Node.js is installed: `node -v`
-   - Clear npm cache: `npm cache clean --force`
-
-3. **API connection issues**:
-   - Verify backend is running on http://localhost:8080
-   - Check browser console for CORS errors
-   - Ensure both services are running simultaneously
 
 ## 📝 License
 
